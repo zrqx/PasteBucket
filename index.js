@@ -34,13 +34,13 @@ app.post('/pastes', async (req,res) => {
     res.send(response)
 })
 
-app.patch('/pastes', async (req,res) => {
-    let {paste_id, updated_message} = req.body
-    console.log(`${paste_id} and ${updated_message}`)
+app.patch('/pastes/:paste_id', async (req,res) => {
+    let {paste_id} = req.params
+    let {updated_message} = req.body
     let response = await Paste.findOneAndUpdate({'paste_id': paste_id},
         {"$set": {"body": updated_message}}
     )
-    res.send(response)
+    res.sendStatus(201)
 })
 
 app.delete('/pastes/:paste_id', async (req,res) => {
