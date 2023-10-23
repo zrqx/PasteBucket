@@ -6,12 +6,12 @@ const pasteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    paste_id: {
+    pasteId: {
         type: String,
         default: () => randomstring.generate(6)
 
     },
-    creator_id: {
+    creatorId: {
         type: String,
         required: true
     },

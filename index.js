@@ -26,32 +26,32 @@ app.get('/pastes', async (req,res) => {
 })
 
 app.post('/pastes', async (req,res) => {
-    let {message, creator_id} = req.body
+    let {message, creatorId} = req.body
     let response = await Paste.create({
         body: message,
-        creator_id
+        creatorId
     })
     res.send(response)
 })
 
-app.get('/pastes/:paste_id', async (req,res) => {
-    let {paste_id} = req.params
-    let response = await Paste.findOne({'paste_id':paste_id})
+app.get('/pastes/:pasteId', async (req,res) => {
+    let {pasteId} = req.params
+    let response = await Paste.findOne({'pasteId':pasteId})
     res.send(response)
 })
 
-app.patch('/pastes/:paste_id', async (req,res) => {
-    let {paste_id} = req.params
-    let {updated_message} = req.body
-    let response = await Paste.findOneAndUpdate({'paste_id': paste_id},
-        {"$set": {"body": updated_message}}
+app.patch('/pastes/:pasteId', async (req,res) => {
+    let {pasteId} = req.params
+    let {updatedMessage} = req.body
+    await Paste.findOneAndUpdate({'pasteId': pasteId},
+        {"$set": {"body": updatedMessage}}
     )
     res.sendStatus(201)
 })
 
-app.delete('/pastes/:paste_id', async (req,res) => {
-    let {paste_id} = req.params
-    let response = await Paste.deleteOne({'paste_id': paste_id})
+app.delete('/pastes/:pasteId', async (req,res) => {
+    let {pasteId} = req.params
+    let response = await Paste.deleteOne({'pasteId': pasteId})
     res.send(response)
 })
 
