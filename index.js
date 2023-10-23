@@ -34,6 +34,12 @@ app.post('/pastes', async (req,res) => {
     res.send(response)
 })
 
+app.get('/pastes/:paste_id', async (req,res) => {
+    let {paste_id} = req.params
+    let response = await Paste.findOne({'paste_id':paste_id})
+    res.send(response)
+})
+
 app.patch('/pastes/:paste_id', async (req,res) => {
     let {paste_id} = req.params
     let {updated_message} = req.body
