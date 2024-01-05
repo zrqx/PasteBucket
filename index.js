@@ -11,8 +11,8 @@ initializersController.load_env_vars()
 initializersController.establish_db_connection()
 
 app.use(cors())
+app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(initializersController.authenticate)
 
 app.use('/users', userRoutes)
-app.use('/pastes', pasteRoutes)
+app.use('/pastes', initializersController.authenticate,  pasteRoutes)
